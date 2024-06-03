@@ -10,7 +10,6 @@ from sklearn.ensemble import (
     RandomForestClassifier,
 )
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import r2_score
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
@@ -43,13 +42,49 @@ class ModelTrainer:
                 "Decision Tree": DecisionTreeClassifier(),
                 "Gradient Boosting": GradientBoostingClassifier(),
                 "Logistic Regression": LogisticRegression(),
-                "XGBRegressor": XGBClassifier(),
-                "CatBoosting Regressor": CatBoostClassifier(verbose=False),
+                "XGBClassifier": XGBClassifier(),
+                "CatBoosting Classifier": CatBoostClassifier(verbose=False),
                 "AdaBoost Classifier": AdaBoostClassifier(),
             }
 
+            params = {
+                "Decision Tree": {
+                    'criterion': ['gini', 'entropy'],
+                    'max_depth': [None, 10, 20]
+                },
+                "Random Forest": {
+                    'n_estimators': [10, 50, 100],
+                    'max_depth': [None, 10, 20]
+                },
+                "Gradient Boosting": {
+                    'learning_rate': [0.01, 0.1],
+                    'n_estimators': [50, 100],
+                    'max_depth': [3, 5]
+                },
+                "Logistic Regression": {
+                    'penalty': ['l1', 'l2'],
+                    'C': [0.1, 1, 10],
+                    'solver': ['liblinear']
+                },
+                "XGBClassifier": {
+                    'learning_rate': [0.01, 0.1],
+                    'n_estimators': [50, 100],
+                    'max_depth': [3, 5]
+                },
+                "CatBoosting Classifier": {
+                    'depth': [4, 6],
+                    'learning_rate': [0.01, 0.1],
+                    'iterations': [100, 200]
+                },
+                "AdaBoost Classifier": {
+                    'n_estimators': [50, 100],
+                    'learning_rate': [0.01, 0.1]
+                }
+            }
+
+
             model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,
-                                             models=models)
+                                             models=models,param=params)
             
             ## To get best model score from dict
             best_model_score = max(sorted(model_report.values()))
