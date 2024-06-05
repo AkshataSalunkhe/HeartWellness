@@ -1,13 +1,12 @@
 import React from 'react';
-import Navbar from './Navbar';
-import './Home.css';
-//import backgroundImage from '../../assets/HeartStroke.png';
+import Navbar from './Components/Navbar'; 
+import './Components/Navbar/Home.css';
 
 function Home() {
   return (
     <div>
       <Navbar />
-    <main>
+      <main className="Home-main">
         <div className="main-content">
           <h1>The next generation of care for heart health</h1>
           <p>Track your heart health and prevent strokes effectively.</p>
@@ -18,5 +17,4 @@ function Home() {
   );
 }
 
-export default Home;
-
+export default Home

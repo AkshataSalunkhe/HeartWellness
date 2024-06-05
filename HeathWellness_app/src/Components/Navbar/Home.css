@@ -5,19 +5,7 @@
     padding: 40px 20px;
     background-size: cover;
     background-position: center;
-    height: calc(100vh - 80px); /* Adjust the height to fill the screen except the header */
-    background-image: url('../../assets/HeartStroke.png'); /* Adjust the path to your background image */
-  }
-
-  .Navbar-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
-    background-size: cover;
-    background-position: center;
-    height: calc(100vh - 80px); /* Adjust the height to fill the screen except the header */
-    background-color: rgba(0, 0, 0, 0.5); /* Optional: to add an overlay effect */
+    height: calc(100vh - 80px); 
   }
   
   .main-content {

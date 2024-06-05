@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './Navbar.css';
-import logo from '../../assets/Logo.png'; // Adjust the path to your logo file
+import './Components/Navbar/Navbar.css';
+import logo from '../../assets/Logo.png'; 
 
 function Navbar() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ function Navbar() {
       </div>
       <nav className="Navbar-nav">
         <ul>
-          <li><Link to="/">Home</Link></li>
+          <li><Link to="/home">Home</Link></li>
           <li><Link to="/customer-login">Customer Login</Link></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#plans">Plans</a></li>

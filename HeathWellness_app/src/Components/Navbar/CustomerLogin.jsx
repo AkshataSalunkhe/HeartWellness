@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Navbar from './Navbar';
-import './CustomerLogin.css';
+import Navbar from './Components/Navbar.css';
+import '../Components/Navbar/CustomerLogin.css';
 
 function CustomerLogin({ isNewUser }) {
   const [isRegistering, setIsRegistering] = useState(isNewUser);
