@@ -1,39 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Application</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul class="nav-tabs">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <button onclick="location.href='#login'">Login</button>
-                <button onclick="location.href='#signup'">Signup</button>
-            </div>
-        </nav>
-    </header>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
 
-    <main>
-        <section id="home">
-            <h1>Welcome to the Health Application</h1>
-            <p>Your health, our priority.</p>
-        </section>
-        <section id="about">
-            <h2>About Us</h2>
-            <p>Learn more about our mission and values.</p>
-        </section>
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>Get in touch with us for more information.</p>
-        </section>
-    </main>
-</body>
-</html>
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3388FF;
+    padding: 30px 20px;
+}
+
+header .logo img {
+    height: 50px;
+}
+
+header .site-name h1 {
+    margin: 0;
+    color: white;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.auth-buttons button {
+    background-color: #fff;
+    color: #3388FF;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.auth-buttons button:hover {
+    background-color: #ddd;
+}
+
+.nav-tabs {
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+}
+
+.nav-tabs ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-tabs li {
+    margin-right: 20px;
+}
+
+.nav-tabs a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.nav-tabs a:hover {
+    background-color: #575757;
+}
+
+main {
+    padding: 20px;
+}
+
+.hero {
+    background-color: #fff;
+    text-align: center;
+    padding: 50px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.hero h1 {
+    color: #3388FF;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.hero button {
+    background-color: #3388FF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.hero button:hover {
+    background-color: #3388FF;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+section h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.features ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.footer-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-links li {
+    margin-right: 20px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
