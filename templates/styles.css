@@ -10,7 +10,7 @@ header {
     justify-content: space-between;
     align-items: center;
     background-color: #3388FF;
-    padding: 30px 20px;
+    padding: 50px 30px;
 }
 
 header .logo img {
@@ -25,7 +25,7 @@ header .site-name h1 {
 }
 
 .auth-buttons button {
-    background-color: #fff;
+    background-color: #ffffff;
     color: #3388FF;
     border: none;
     padding: 10px 20px;
@@ -36,13 +36,13 @@ header .site-name h1 {
 }
 
 .auth-buttons button:hover {
-    background-color: #ddd;
+    background-color: #ffffff;
 }
 
 .nav-tabs {
     display: flex;
     justify-content: center;
-    background-color: #333;
+    background-color: #ddd;
 }
 
 .nav-tabs ul {
@@ -53,20 +53,20 @@ header .site-name h1 {
 }
 
 .nav-tabs li {
-    margin-right: 20px;
+    margin-right: 90px;
 }
 
 .nav-tabs a {
     text-decoration: none;
-    color: white;
+    color: black;
     font-weight: bold;
-    padding: 10px;
+    padding: 15px;
     display: block;
     transition: background-color 0.3s;
 }
 
 .nav-tabs a:hover {
-    background-color: #575757;
+    background-color: #3388FF;
 }
 
 main {
