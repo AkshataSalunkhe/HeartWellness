@@ -9,24 +9,24 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #3388FF;
-    padding: 50px 30px;
+    background-color: #fff;
+    padding: 10px 20px;
 }
 
 header .logo img {
-    height: 60px;
+    height: 50px;
 }
 
 header .site-name h1 {
     margin: 0;
-    color: white;
+    color: #333;
     text-align: center;
     font-size: 1.5em;
 }
 
 .auth-buttons button {
-    background-color: #ffffff;
-    color: #3388FF;
+    background-color: #007bff;
+    color: white;
     border: none;
     padding: 10px 20px;
     margin-left: 10px;
@@ -36,13 +36,14 @@ header .site-name h1 {
 }
 
 .auth-buttons button:hover {
-    background-color: #ffffff;
+    background-color: #0056b3;
 }
 
 .nav-tabs {
     display: flex;
     justify-content: center;
-    background-color: #ddd;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
 }
 
 .nav-tabs ul {
@@ -53,20 +54,20 @@ header .site-name h1 {
 }
 
 .nav-tabs li {
-    margin-right: 90px;
+    margin-right: 20px;
 }
 
 .nav-tabs a {
     text-decoration: none;
-    color: black;
+    color: #333;
     font-weight: bold;
-    padding: 15px;
+    padding: 10px;
     display: block;
-    transition: background-color 0.3s;
+    transition: color 0.3s;
 }
 
 .nav-tabs a:hover {
-    background-color: #3388FF;
+    color: #007bff;
 }
 
 main {
@@ -74,14 +75,24 @@ main {
 }
 
 .hero {
-    background-color: #fff;
-    text-align: center;
-    padding: 50px 20px;
-    border-bottom: 1px solid #ddd;
+    background: url('./images/HeartStroke.png') no-repeat center center;
+    background-size: cover;
+    color: white;
+    text-align: left;
+    padding: 100px 20px;
+    position: relative;
+}
+
+.hero-content {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    display: inline-block;
+    border-radius: 8px;
+    max-width: 600px;
 }
 
 .hero h1 {
-    color: #3388FF;
+    color: #fff;
     margin-bottom: 20px;
 }
 
@@ -91,7 +102,7 @@ main {
 }
 
 .hero button {
-    background-color: #3388FF;
+    background-color: #007bff;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -101,7 +112,23 @@ main {
 }
 
 .hero button:hover {
-    background-color: #3388FF;
+    background-color: #0056b3;
+}
+
+.introduction {
+    background: url('introduction-background.jpg') no-repeat center center;
+    background-size: cover;
+    color: black;
+    text-align: center;
+    padding: 50px 20px;
+    position: relative;
+}
+
+.introduction-content {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    display: inline-block;
+    border-radius: 8px;
 }
 
 section {
@@ -147,6 +174,7 @@ footer {
     text-decoration: underline;
 }
 
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -205,7 +233,7 @@ form input {
 }
 
 form button {
-    background-color: #3388FF;
+    background-color: #007bff;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -214,7 +242,7 @@ form button {
 }
 
 form button:hover {
-    background-color: #3388FF;
+    background-color: #0056b3;
 }
 
 form p {
