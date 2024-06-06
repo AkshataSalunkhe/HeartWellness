@@ -1,0 +1,41 @@
+.Home-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-size: cover;
+    background-position: center;
+    height: calc(100vh - 80px); 
+  }
+  
+  .main-content {
+    text-align: left;
+    max-width: 600px;
+    color: white; /* Ensure the text is visible against the background */
+  }
+  
+  .main-content h1 {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  .main-content p {
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  .main-button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
