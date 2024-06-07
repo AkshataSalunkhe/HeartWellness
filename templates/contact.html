@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Wellness</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src='./images/Logo copy.png' alt="">
+        </div>
+        <div class="site-name">
+            <h1>HEART WELLNESS</h1>
+        </div>
+        <div class="auth-buttons">
+            <button id="login-btn">Login</button>
+            <button id="signup-btn">Signup</button>
+        </div>
+    </header>
+    <nav class="nav-tabs">
+        <ul>
+            <li><a href="index.html#home">HOME</a></li>
+            <li><a href="index.html#about">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+            <li><a href="#resources">RESOURCES</a></li>
+            <li><a href="#demo">DEMO</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you! Whether you have a question about our services, need support, or just want to say hello, here's how you can reach us.</p>
+        </section>
+
+        <section class="contact-info">
+            <h2>Contact Information</h2>
+            <p><strong>Phone:</strong> (123) 456-7890</p>
+            <p><strong>Email:</strong> info@healthcare.com</p>
+            <p><strong>Address:</strong> 123 Health St, Wellness City, HC 12345</p>
+            <p><strong>Business Hours:</strong> Monday - Friday, 9 AM - 5 PM</p>
+        </section>
+
+        <section class="contact-form">
+            <h2>Contact Form</h2>
+            <form action="submit_form.php" method="post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <label for="inquiry">Inquiry Type:</label>
+                <select id="inquiry" name="inquiry">
+                    <option value="general">General Inquiry</option>
+                    <option value="support">Support</option>
+                    <option value="sales">Sales</option>
+                    <option value="feedback">Feedback</option>
+                </select>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section class="social-media">
+            <h2>Follow Us</h2>
+            <a href="https://facebook.com" target="_blank">Facebook</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+        </section>
+
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <p>Find answers to common questions <a href="faq.html">here</a>.</p>
+        </section>
+
+        <section class="live-chat">
+            <h2>Live Chat</h2>
+            <p>Need immediate assistance? Chat with us live <a href="livechat.html">here</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Heart Wellness. All rights reserved.</p>
+        <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#privacy">Privacy Policy</a></li>
+            <li><a href="#terms">Terms of Service</a></li>
+        </ul>
+    </footer>
+
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="login-form" class="form">
+                <h2>Login</h2>
+                <form>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p>New user? <a href="#" id="show-signup">Register here</a></p>
+            </div>
+            <div id="signup-form" class="form" style="display:none;">
+                <h2>Signup</h2>
+                <form>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email-signup">Email:</label>
+                    <input type="email" id="email-signup" name="email" required>
+                    <label for="password-signup">Password:</label>
+                    <input type="password" id="password-signup" name="password" required>
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                    <button type="submit">Signup</button>
+                </form>
+                <p>Already have an account? <a href="#" id="show-login">Login here</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
