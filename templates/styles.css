@@ -116,7 +116,7 @@ main {
 }
 
 .introduction {
-    background: url('introduction-background.jpg') no-repeat center center;
+    
     background-size: cover;
     color: black;
     text-align: center;

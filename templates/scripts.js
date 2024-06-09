@@ -4,23 +4,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const getStartedBtn = document.getElementById('get-started-btn');
     const modal = document.getElementById('auth-modal');
     const closeBtn = document.querySelector('.close-btn');
-    const loginForm = document.getElementById('login-form');
-    const signupForm = document.getElementById('signup-form');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
     const showSignupLink = document.getElementById('show-signup');
     const showLoginLink = document.getElementById('show-login');
-    
+    const authButtons = document.querySelector('.auth-buttons');
+    const userDisplayName = document.createElement('span');
+
     console.log('Document loaded, initializing event listeners.');
 
     const openModal = (formToShow) => {
         console.log(`Opening modal for ${formToShow}`);
         modal.style.display = 'block';
         if (formToShow === 'login') {
-            loginForm.style.display = 'block';
-            signupForm.style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('signup-form').style.display = 'none';
         } else {
-            loginForm.style.display = 'none';
-            signupForm.style.display = 'block';
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'block';
         }
+    };
+
+    const displayUser = (name) => {
+        userDisplayName.textContent = `Welcome, ${name}`;
+        authButtons.innerHTML = '';
+        authButtons.appendChild(userDisplayName);
     };
 
     if (loginBtn) {
@@ -86,8 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 if (response.ok) {
                     alert('Signup successful!');
-                    // Optionally, redirect to another page
-                    // window.location.href = 'index.html#home';
+                    window.location.href = 'index.html#home';
                 } else {
                     alert(`Signup failed: ${data.message}`);
                 }
@@ -100,36 +107,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (loginForm) {
         loginForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
+            event.preventDefault(); // Prevent the form from submitting the traditional way
             console.log('Login form submitted');
 
-            // Log the current modal content
-            console.log('Current modal content:', modal.innerHTML);
-    
-            const emailInput = document.getElementById('email-login'); // Ensure correct ID
-            const passwordInput = document.getElementById('password-login'); // Ensure correct ID
+            const emailInput = document.getElementById('email-login');
+            const passwordInput = document.getElementById('password-login');
 
-            // Check if the elements exist
             if (!emailInput || !passwordInput) {
                 console.error('Email or Password input not found');
                 alert('Email or Password input not found');
                 return;
             }
-    
+
             const email = emailInput.value;
             const password = passwordInput.value;
-    
+
             try {
                 const response = await fetch('http://localhost:3000/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
                 });
-    
+
                 const data = await response.json();
                 if (response.ok) {
                     alert('Login successful');
-                    // Handle successful login (e.g., save token, redirect to dashboard)
+                    console.log('Token received:', data.token);
+                    console.log('User name:', data.userName);
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('userName', data.userName); // Store user's name
+                    displayUser(data.userName); // Update UI with user's name
+                    // Redirect after showing the alert and console log
+                    setTimeout(() => {
+                        window.location.href = 'index.html#home';
+                    }, 1000);
                 } else {
                     alert(data.message);
                 }
@@ -139,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-       
+
     // Adding event listener for navigation links with smooth scrolling
     const navLinks = document.querySelectorAll('nav ul li a');
     navLinks.forEach(link => {
@@ -155,4 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     console.log('Event listeners initialized.');
+
+    // Check if user is logged in on page load
+    const token = localStorage.getItem('token');
+    const userName = localStorage.getItem('userName');
+    if (token && userName) {
+        displayUser(userName);
+    }
 });

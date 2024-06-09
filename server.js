@@ -5,16 +5,14 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const path = require('path');
-const cors = require('cors');
+const cors = require('cors'); // Add this line
 
 const app = express();
-
-app.use(cors());
+app.use(cors()); // Add this line
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'templates')));
 app.use(express.urlencoded({ extended: false }));
 
-// Update the connection string to your MongoDB Atlas connection string
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/heart-wellness';
 
 mongoose.connect(MONGODB_URI, {
@@ -35,39 +33,38 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema);
 
-// User Signup Route
 app.post('/signup', async (req, res) => {
     const { name, email, password, phone } = req.body;
-    console.log('Received signup data:', req.body);
-
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ name, email, password: hashedPassword, phone });
     try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ name, email, password: hashedPassword, phone });
         await user.save();
+        console.log(`User registered successfully: ${email}`);
         res.status(201).send({ message: 'User registered successfully' });
     } catch (error) {
-        console.error('Error registering user:', error);
-        res.status(400).send({ message: 'Error registering user', error: error.message });
+        console.error(`Error registering user: ${error.message}`);
+        res.status(400).send({ message: 'Error registering user', error });
     }
 });
 
-// User Login Route
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    console.log('Received login data:', req.body);
     try {
         const user = await User.findOne({ email });
         if (!user) {
+            console.log(`Invalid email or password: ${email}`);
             return res.status(400).send({ message: 'Invalid email or password' });
         }
-        const isMatch = await bcrypt.compare(password, user.password); // Compare hashed password
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
+            console.log(`Invalid password for email: ${email}`);
             return res.status(400).send({ message: 'Invalid email or password' });
         }
         const token = jwt.sign({ userId: user._id }, 'secret_key');
-        res.send({ token });
+        console.log(`Login successful for email: ${email}`);
+        res.send({ token, userName: user.name }); // Return the user's name along with the token
     } catch (error) {
-        console.error('Error during login:', error);
+        console.error(`Server error: ${error.message}`);
         res.status(500).send({ message: 'Server error' });
     }
 });
