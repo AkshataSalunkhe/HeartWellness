@@ -116,7 +116,7 @@ main {
 }
 
 .introduction {
-    background: url('introduction-background.jpg') no-repeat center center;
+    
     background-size: cover;
     color: black;
     text-align: center;
@@ -247,4 +247,84 @@ form button:hover {
 
 form p {
     margin-top: 10px;
+}
+
+/* Contact Page Styles */
+.contact-info, .contact-form, .social-media, .faq, .live-chat {
+    background: white;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info h2, .contact-form h2, .social-media h2, .faq h2, .live-chat h2 {
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 10px;
+}
+
+.contact-info p, .contact-form label, .social-media a, .faq p, .live-chat p {
+    margin-bottom: 10px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.contact-form input, .contact-form textarea, .contact-form select, .contact-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.contact-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+    background-color: #0056b3;
+}
+
+.social-media a {
+    display: inline-block;
+    margin-right: 10px;
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.social-media a:hover {
+    text-decoration: underline;
+}
+
+.faq a, .live-chat a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.faq a:hover, .live-chat a:hover {
+    text-decoration: underline;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+section h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+html {
+    scroll-behavior: smooth;
 }
