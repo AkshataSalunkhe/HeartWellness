@@ -19,5 +19,38 @@ class CustomData:
                     MaxHR: int,
                     ExerciseAngina:str,
                     Oldpeak,
-                    ST_Slope:str)
+                    ST_Slope:str):
         
+        self.Age = Age
+        self.Sex = Sex
+        self.ChestPainType = ChestPainType
+        self.RestingBP = RestingBP
+        self.Cholesterol = Cholesterol
+        self.FastingBS = FastingBS
+        self.RestingECG = RestingECG
+        self.MaxHR = MaxHR
+        self.ExerciseAngina = ExerciseAngina
+        self.Oldpeak = Oldpeak
+        self.ST_Slope = ST_Slope
+
+
+    def get_data_as_data_frame(self):
+            try:
+                custom_data_input_dict = {
+                    "Age": [self.Age],
+                    "Sex": [self.Sex],
+                    "ChestPainType": [self.ChestPainType],
+                    "RestingBP": [self.RestingBP],
+                    "Cholesterol": [self.Cholesterol],
+                    "FastingBS": [self.FastingBS],
+                    "RestingECG": [self.RestingECG],
+                    "MaxHR": [self.MaxHR],
+                    "ExerciseAngina": [self.ExerciseAngina],
+                    "Oldpeak": [self.Oldpeak],
+                    "ST_Slope": [self.ST_Slope],
+                }
+
+                return pd.DataFrame(custom_data_input_dict)
+
+            except Exception as e:
+                raise CustomException(e, sys)
