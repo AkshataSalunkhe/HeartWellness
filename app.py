@@ -1,48 +1,38 @@
-from flask import Flask,request,render_template
-import numpy as np
+from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask_cors import CORS
 import pandas as pd
+from src.pipeline.predict_pipeline import PredictPipeline
 
-from sklearn.preprocessing import StandardScaler
-from src.pipeline.predict_pipeline import CustomData,PredictPipeline
-
-application=Flask(__name__)
-
-app=application
+app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
-def index():
+def home():
     return render_template('index.html')
 
-@app.route('/predictdata',methods=['GET','POST'])
-def predict_datapoint():
-    if request.method=='GET':
-        return render_template('home.html')
-    else:
-        data=CustomData(
-            Age=float(request.form.get('Age')),
-            Sex=request.form.get('Sex'),
-            ChestPainType=request.form.get('ChestPainType'),
-            RestingBP=float(request.form.get('RestingBP')),
-            Cholesterol=float(request.form.get('Cholesterol')),
-            FastingBS=float(request.form.get('FastingBS')),
-            RestingECG=request.form.get('RestingECG'),
-            MaxHR=float(request.form.get('MaxHR')),
-            ExerciseAngina=request.form.get('ExerciseAngina'),
-            Oldpeak=float(request.form.get('Oldpeak')),
-            ST_Slope=request.form.get('ST_Slope'),
+@app.route('/prediction.html')
+def prediction():
+    return render_template('prediction.html')
 
+@app.route('/predict', methods=['POST'])
+def predict():
+    try:
+        data = request.get_json()
+        features = pd.DataFrame([data])  # Convert the received JSON data into a DataFrame
+        prediction_pipeline = PredictPipeline()
+        prediction = prediction_pipeline.predict(features)
+        return jsonify({'prediction': prediction[0]})
+    except Exception as e:
+        print(f"Error during prediction: {e}")
+        return jsonify({'error': str(e)}), 500
 
-        )
-        pred_df=data.get_data_as_data_frame()
-        print(pred_df)
-        print("Before Prediction")
+@app.route('/styles.css')
+def styles():
+    return send_from_directory('.', 'templates/styles.css')
 
-        predict_pipeline=PredictPipeline()
-        print("Mid Prediction")
-        results=predict_pipeline.predict(pred_df)
-        print("after Prediction")
-        return render_template('home.html',results=results[0])
+@app.route('/scripts.js')
+def scripts():
+    return send_from_directory('.', 'templates/scripts.js')
 
-
-if __name__=="__main__":
-    app.run(host="0.0.0.0")     
+if __name__ == "__main__":
+    app.run(debug=True)

@@ -62,3 +62,8 @@ def load_object(file_path):
     except Exception as e:
         raise CustomException(e, sys)
     
+import pickle
+
+def load_object(file_path):
+    with open(file_path, 'rb') as file:
+        return pickle.load(file)

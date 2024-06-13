@@ -10,8 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const showLoginLink = document.getElementById('show-login');
     const authButtons = document.querySelector('.auth-buttons');
     const userDisplayName = document.createElement('span');
+    const logoutBtn = document.createElement('button');
 
     console.log('Document loaded, initializing event listeners.');
+
+    logoutBtn.textContent = 'Logout';
+    logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userName');
+        window.location.assign('index.html#home');
+    });
 
     const openModal = (formToShow) => {
         console.log(`Opening modal for ${formToShow}`);
@@ -29,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userDisplayName.textContent = `Welcome, ${name}`;
         authButtons.innerHTML = '';
         authButtons.appendChild(userDisplayName);
+        authButtons.appendChild(logoutBtn);
     };
 
     if (loginBtn) {
@@ -93,8 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const data = await response.json();
                 if (response.ok) {
-                    alert('Signup successful!');
-                    window.location.href = 'index.html#home';
+                    alert('Login successful');
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('userName', data.userName);
+                    displayUser(data.userName);
+                    window.location.assign('index.html#home');
                 } else {
                     alert(`Signup failed: ${data.message}`);
                 }
@@ -132,15 +144,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 if (response.ok) {
                     alert('Login successful');
-                    console.log('Token received:', data.token);
-                    console.log('User name:', data.userName);
                     localStorage.setItem('token', data.token);
-                    localStorage.setItem('userName', data.userName); // Store user's name
-                    displayUser(data.userName); // Update UI with user's name
-                    // Redirect after showing the alert and console log
-                    setTimeout(() => {
-                        window.location.href = 'index.html#home';
-                    }, 1000);
+                    localStorage.setItem('userName', data.userName);
+                    displayUser(data.userName);
+                    window.location.assign('index.html#home');
                 } else {
                     alert(data.message);
                 }
@@ -173,4 +180,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (token && userName) {
         displayUser(userName);
     }
+
+    // Prediction page content
+
+    const predictionForm = document.getElementById('predictionForm');
+
+    if (predictionForm) {
+        predictionForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(predictionForm);
+            const inputData = {};
+            formData.forEach((value, key) => {
+                inputData[key] = value;
+            });
+
+            try {
+                const response = await fetch('http://localhost:5000/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(inputData)
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    const predictionMessage = data.prediction === 0 
+                        ? "<strong style='color: green;'>You are healthy with no heart disease.</strong>" 
+                        : "<strong style='color: red;'>You need to take care, there are symptoms of heart disease.</strong>";
+                    document.getElementById('predictionResult').innerHTML = predictionMessage;
+                } else {
+                    document.getElementById('predictionResult').textContent = `Error: ${data.error}`;
+                }
+            } catch (error) {
+                document.getElementById('predictionResult').textContent = `An error occurred during prediction: ${error.message}`;
+            }
+        });
+    }
+
+    
 });
