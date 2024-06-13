@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Wellness</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src='./images/Logo copy.png' alt="">
+        </div>
+        <div class="site-name">
+            <h1>HEART WELLNESS</h1>
+        </div>
+        <div class="auth-buttons">
+            <button id="login-btn">Login</button>
+            <button id="signup-btn">Signup</button>
+        </div>
+    </header>
+    <nav class="nav-tabs">
+        <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="prediction.html">PREDICTION</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+            <li><a href="#resources">RESOURCES</a></li>
+            <li><a href="#demo">DEMO</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section class="prediction-form">
+            <h2>Predict Your Heart Stroke Risk</h2>
+            <form id="predictionForm">
+                <div class="mb-3">
+                    <label class="form-label">Age</label>
+                    <input class="form-control" type="number" name="Age" placeholder="Enter your Age" min='1' max='100' required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Sex</label>
+                    <select class="form-control" name="Sex" required>
+                        <option selected disabled value="">Select your Gender</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Chest Pain Type</label>
+                    <select class="form-control" name="ChestPainType" required>
+                        <option selected disabled value="">Select Chest Pain Type</option>
+                        <option value="ATA">Atypical Angina</option>
+                        <option value="NAP">Non-Anginal Pain</option>
+                        <option value="ASY">Asymptomatic</option>
+                        <option value="TA">Typical angina</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Resting Blood Pressure</label>
+                    <input class="form-control" type="number" name="RestingBP" placeholder="Enter your Resting Blood Pressure" min='0' max='200' required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Cholesterol</label>
+                    <input class="form-control" type="number" name="Cholesterol" placeholder="Enter your Cholesterol" min='0' max='700' required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">FastingBS</label>
+                    <input class="form-control" type="number" name="FastingBS" placeholder="Enter your FastingBS" min='0' max='1' required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">MaxHR</label>
+                    <input class="form-control" type="number" name="MaxHR" placeholder="Enter your MaxHR" min='50' max='220' required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">RestingECG</label>
+                    <select class="form-control" name="RestingECG" required>
+                        <option selected disabled value="">Select RestingECG</option>
+                        <option value="Normal">Normal</option>
+                        <option value="ST">ST</option>
+                        <option value="LVH">LVH</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">ExerciseAngina</label>
+                    <select class="form-control" name="ExerciseAngina" required>
+                        <option selected disabled value="">Select ExerciseAngina</option>
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">ST_Slope</label>
+                    <select class="form-control" name="ST_Slope" required>
+                        <option selected disabled value="">Select ST_Slope</option>
+                        <option value="Flat">Flat</option>
+                        <option value="Up">Up</option>
+                        <option value="Down">Down</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Oldpeak</label>
+                    <input class="form-control" type="number" name="Oldpeak" placeholder="Enter your Oldpeak" min='0' max='3' required />
+                </div>
+                <div class="mb-3">
+                    <input class="btn btn-primary" type="submit" value="Predict your chances of Heart Disease" />
+                </div>
+            </form>
+            <h2 id="predictionResult">The prediction is: </h2>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Heart Wellness. All rights reserved.</p>
+        <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#privacy">Privacy Policy</a></li>
+            <li><a href="#terms">Terms of Service</a></li>
+        </ul>
+    </footer>
+</body>
+</html>
