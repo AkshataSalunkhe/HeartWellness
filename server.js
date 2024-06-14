@@ -24,11 +24,25 @@ mongoose.connect(MONGODB_URI, {
     console.error('Error connecting to MongoDB:', error);
 });
 
-const UserSchema = new mongoose.Schema({
+/*const UserSchema = new mongoose.Schema({
     name: String,
     email: { type: String, unique: true },
     password: String,
     phone: String
+});*/
+
+const UserSchema = new mongoose.Schema({
+    name: String,
+    email: { type: String, unique: true },
+    password: String,
+    phone: String,
+    history: [
+        {
+            date: { type: Date, default: Date.now },
+            prediction: String,
+            data: mongoose.Schema.Types.Mixed
+        }
+    ]
 });
 
 const User = mongoose.model('User', UserSchema);
@@ -79,6 +93,36 @@ const authenticateToken = (req, res, next) => {
         next();
     });
 };
+
+// Save history 
+app.post('/save-prediction', authenticateToken, async (req, res) => {
+    const { userId } = req.user;
+    const { prediction, data } = req.body;
+
+    try {
+        const user = await User.findById(userId);
+        user.history.push({ prediction, data });
+        await user.save();
+        res.status(200).send({ message: 'Prediction saved successfully' });
+    } catch (error) {
+        console.error(`Error saving prediction: ${error.message}`);
+        res.status(500).send({ message: 'Error saving prediction', error });
+    }
+});
+
+app.get('/get-history', authenticateToken, async (req, res) => {
+    const { userId } = req.user;
+
+    try {
+        const user = await User.findById(userId);
+        res.status(200).send({ history: user.history });
+    } catch (error) {
+        console.error(`Error retrieving history: ${error.message}`);
+        res.status(500).send({ message: 'Error retrieving history', error });
+    }
+});
+
+
 
 // Example protected route
 app.get('/protected', authenticateToken, (req, res) => {
