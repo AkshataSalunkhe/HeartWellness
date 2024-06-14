@@ -1,3 +1,6 @@
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const loginBtn = document.getElementById('login-btn');
     const signupBtn = document.getElementById('signup-btn');
@@ -210,6 +213,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         ? "<strong style='color: green;'>You are healthy with no heart disease.</strong>" 
                         : "<strong style='color: red;'>You need to take care, there are symptoms of heart disease.</strong>";
                     document.getElementById('predictionResult').innerHTML = predictionMessage;
+
+                    // Save the prediction history
+                    const token = localStorage.getItem('token');
+                    if (token) {
+                        await fetch('http://localhost:3000/save-prediction', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': token
+                            },
+                            body: JSON.stringify({ prediction: data.prediction, data: inputData })
+                        });
+                    }
+
+                    // Update history table
+                    displayHistory();
                 } else {
                     document.getElementById('predictionResult').textContent = `Error: ${data.error}`;
                 }
@@ -217,6 +236,91 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('predictionResult').textContent = `An error occurred during prediction: ${error.message}`;
             }
         });
+    }
+
+    // Display history function
+
+    const displayHistory = async () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            try {
+                const response = await fetch('http://localhost:3000/get-history', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    }
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    const historySection = document.createElement('section');
+                    historySection.className = 'history';
+                    historySection.innerHTML = '<h2>Prediction History</h2>';
+
+                    // Create table
+                    const table = document.createElement('table');
+                    table.className = 'history-table';
+                    table.innerHTML = `
+                        <thead>
+                            <tr>
+                                <th>Date and Time</th>
+                                <th>Prediction</th>
+                                <th>Age</th>
+                                <th>Sex</th>
+                                <th>Chest Pain Type</th>
+                                <th>Resting BP</th>
+                                <th>Cholesterol</th>
+                                <th>Fasting BS</th>
+                                <th>Max HR</th>
+                                <th>Resting ECG</th>
+                                <th>Exercise Angina</th>
+                                <th>ST Slope</th>
+                                <th>Oldpeak</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    `;
+
+                    const tbody = table.querySelector('tbody');
+
+                    // Populate table rows
+                    data.history.forEach((item) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${new Date(item.date).toLocaleString()}</td>
+                            <td>${item.prediction === "0" ? "No" : "Yes"}</td>
+                            <td>${item.data.Age}</td>
+                            <td>${item.data.Sex}</td>
+                            <td>${item.data.ChestPainType}</td>
+                            <td>${item.data.RestingBP}</td>
+                            <td>${item.data.Cholesterol}</td>
+                            <td>${item.data.FastingBS}</td>
+                            <td>${item.data.MaxHR}</td>
+                            <td>${item.data.RestingECG}</td>
+                            <td>${item.data.ExerciseAngina}</td>
+                            <td>${item.data.ST_Slope}</td>
+                            <td>${item.data.Oldpeak}</td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+
+                    historySection.appendChild(table);
+                    document.querySelector('main').appendChild(historySection);
+                }
+            } catch (error) {
+                console.error('Error fetching history:', error);
+            }
+        }
+    };
+
+    // Display history if logged in
+    const path = window.location.pathname.split('/').pop();
+
+    if (token && userName && path === 'prediction.html') {
+        displayUser(userName);
+        displayHistory();
     }
 
     
