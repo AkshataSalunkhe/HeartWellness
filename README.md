@@ -34,5 +34,5 @@ HeartWellness is a comprehensive web application designed to predict the likelih
 
 ## Demo
 <div align="center">
-<img src="templates/images/QVGh.gif" alt="Heart with ECG" width="400" height="300">
+<img src="templates/images/Heartwellness Demo.gif" alt="Heart with ECG" width="900" height="600">
 </div>
