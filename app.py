@@ -6,6 +6,7 @@ from src.pipeline.predict_pipeline import PredictPipeline
 app = Flask(__name__)
 CORS(app)
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
