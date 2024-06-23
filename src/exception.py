@@ -15,3 +15,8 @@ class CustomException(Exception):
 
     def __str__(self):
         return self.error_message
+
+class CustomException(Exception):
+    def __init__(self, message, sys_module):
+        super().__init__(message)
+        self.sys_module = sys_module

@@ -3,12 +3,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken'); 
 const path = require('path');
-const cors = require('cors'); // Add this line
+const cors = require('cors');
 
 const app = express();
-app.use(cors()); // Add this line
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'templates')));
 app.use(express.urlencoded({ extended: false }));
@@ -24,11 +24,25 @@ mongoose.connect(MONGODB_URI, {
     console.error('Error connecting to MongoDB:', error);
 });
 
-const UserSchema = new mongoose.Schema({
+/*const UserSchema = new mongoose.Schema({
     name: String,
     email: { type: String, unique: true },
     password: String,
     phone: String
+});*/
+
+const UserSchema = new mongoose.Schema({
+    name: String,
+    email: { type: String, unique: true },
+    password: String,
+    phone: String,
+    history: [
+        {
+            date: { type: Date, default: Date.now },
+            prediction: String,
+            data: mongoose.Schema.Types.Mixed
+        }
+    ]
 });
 
 const User = mongoose.model('User', UserSchema);
@@ -62,11 +76,57 @@ app.post('/login', async (req, res) => {
         }
         const token = jwt.sign({ userId: user._id }, 'secret_key');
         console.log(`Login successful for email: ${email}`);
-        res.send({ token, userName: user.name }); // Return the user's name along with the token
+        res.send({ token, userName: user.name });
     } catch (error) {
         console.error(`Server error: ${error.message}`);
         res.status(500).send({ message: 'Server error' });
     }
+});
+
+const authenticateToken = (req, res, next) => {
+    const token = req.headers['authorization'];
+    if (!token) return res.sendStatus(403);
+
+    jwt.verify(token, 'secret_key', (err, user) => {
+        if (err) return res.sendStatus(403);
+        req.user = user;
+        next();
+    });
+};
+
+// Save history 
+app.post('/save-prediction', authenticateToken, async (req, res) => {
+    const { userId } = req.user;
+    const { prediction, data } = req.body;
+
+    try {
+        const user = await User.findById(userId);
+        user.history.push({ prediction, data });
+        await user.save();
+        res.status(200).send({ message: 'Prediction saved successfully' });
+    } catch (error) {
+        console.error(`Error saving prediction: ${error.message}`);
+        res.status(500).send({ message: 'Error saving prediction', error });
+    }
+});
+
+app.get('/get-history', authenticateToken, async (req, res) => {
+    const { userId } = req.user;
+
+    try {
+        const user = await User.findById(userId);
+        res.status(200).send({ history: user.history });
+    } catch (error) {
+        console.error(`Error retrieving history: ${error.message}`);
+        res.status(500).send({ message: 'Error retrieving history', error });
+    }
+});
+
+
+
+// Example protected route
+app.get('/protected', authenticateToken, (req, res) => {
+    res.send('This is a protected route');
 });
 
 app.listen(3000, () => {

@@ -22,13 +22,14 @@
     </header>
     <nav class="nav-tabs">
         <ul>
-            <li><a href="index.html#home">HOME</a></li>
-            <li><a href="index.html#about">ABOUT</a></li>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="prediction.html">PREDICTION</a></li>
             <li><a href="contact.html">CONTACT</a></li>
-            <li><a href="#resources">RESOURCES</a></li>
+            <li><a href="resource.html">RESOURCES</a></li>
             <li><a href="#demo">DEMO</a></li>
         </ul>
     </nav>
+
 
     <main>
         <section class="hero">
@@ -105,18 +106,18 @@
             <span class="close-btn">&times;</span>
             <div id="login-form" class="form">
                 <h2>Login</h2>
-                <form>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
+                <form id="loginForm">
+                    <label for="email-login">Email:</label>
+                    <input type="email" id="email-login" name="email" required>
+                    <label for="password-login">Password:</label>
+                    <input type="password" id="password-login" name="password" required>
                     <button type="submit">Login</button>
                 </form>
                 <p>New user? <a href="#" id="show-signup">Register here</a></p>
             </div>
             <div id="signup-form" class="form" style="display:none;">
                 <h2>Signup</h2>
-                <form>
+                <form id="signupForm">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required>
                     <label for="email-signup">Email:</label>
@@ -131,5 +132,7 @@
             </div>
         </div>
     </div>
+
+    <script src="scripts.js"></script>
 </body>
 </html>

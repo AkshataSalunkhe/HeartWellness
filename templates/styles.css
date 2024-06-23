@@ -9,8 +9,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 20px;
     background-color: #fff;
-    padding: 10px 20px;
+    color: #333;
 }
 
 header .logo img {
@@ -53,7 +54,8 @@ header .site-name h1 {
     display: flex;
 }
 
-.nav-tabs li {
+.nav-tabs ul li {
+    display: inline;
     margin-right: 20px;
 }
 
@@ -327,4 +329,44 @@ section h2 {
 
 html {
     scroll-behavior: smooth;
+}
+.prediction-form {
+    max-width: 600px;
+    margin: auto;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 0.25rem;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.history-table th, .history-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.history-table th {
+    background-color: #f2f2f2;
+    text-align: left;
 }
